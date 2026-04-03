@@ -5,7 +5,9 @@
 #include <math.h>
 using namespace std;
 
-vector<int> p(5005, -1);
+tuple<int, int, int> edge[1000005];
+
+vector<int> p(100005, -1);
 
 int find(int x)
 {
@@ -25,50 +27,37 @@ bool union_(int u, int v)
     return true;
 }
 
-double weight(double x1, double y1, double x2, double y2)
-{
-    return sqrt(((x1-x2)*(x1-x2)) + ((y1-y2)*(y1-y2)));
-}
-
-vector<tuple<double, int, int>> edges;
 int main()
 {
-    int n; cin >> n;
-    if (n == 1) cout << 0;
+    int n, m;
+    cin >> n >> m;
 
-    vector<pair<double, double>> pos(n);
-    for (int i = 0; i < n; i++)
-        cin >> pos[i].first >> pos[i].second;
-    
-    
-    for (int i = 0; i < n; i++)
+    for (int i = 1; i <= m; i++)
     {
-        for (int j = i + 1; j < n; j++)
-        {
-            double w = weight(pos[i].first, pos[i].second, pos[j].first, pos[j].second);
-            edges.push_back({ w, i, j });
-        }
+        int u, v, w;
+        cin >> u >> v >> w;
+        edge[i] = { w, u, v };
     }
 
-    sort(edges.begin(), edges.end());
+    sort(edge + 1, edge + 1 + m);
 
     int cnt = 0;
-    double ans = 0;
+    int ans = 0;
 
-    for (int i = 0; i < edges.size(); i++)
+    for (int i = 1; i <= m; i++)
     {
-        double w;
-        int u, v;
-        tie(w, u, v) = edges[i];
+        // 정점이 2개면 2개의 마을로 분리
+        if (cnt == n - 2) break; 
+
+        int w, u, v;
+        tie(w, u, v) = edge[i];
         if (union_(u, v))
         {
             cnt++;
             ans += w;
         }
-        if (cnt == n - 1) break;
     }
 
-    printf("%.2f", ans);
-
+    cout << ans << '\n';
     return 0;
 }
