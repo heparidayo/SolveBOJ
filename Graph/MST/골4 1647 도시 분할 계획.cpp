@@ -2,11 +2,9 @@
 #include <tuple>
 #include <algorithm>
 #include <vector>
-#include <math.h>
 using namespace std;
 
 tuple<int, int, int> edge[1000005];
-
 vector<int> p(100005, -1);
 
 int find(int x)
