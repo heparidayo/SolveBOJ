@@ -1,33 +1,26 @@
 #include <iostream>
-#include <stack>
 #include <string>
+#include <stack>
 using namespace std;
 
-int main(void)
+int main()
 {
-    stack<char> stk;
-    string str; cin >> str;
+    string s; cin >> s;
     
-    int answer = 0; 
-    stk.push(str[0]);
-    for (int i = 1; i < str.size(); i++)
+    int ans = 0;
+    stack<char> stk;
+    
+    for (int i = 0; i < s.length(); i++)
     {
-        if (str[i] == '(')
-        {
-            stk.push('(');
-        }
-        else if (str[i-1] == str[i])
+        if (s[i] == '(') stk.push('('); // 막대 + 1
+        else 
         {
             stk.pop();
-            answer++;   // 끝날때 1개 더 생김
-        }
-        else
-        {
-            stk.pop();
-            answer += stk.size();
+            
+            if (s[i - 1] == '(') ans += stk.size(); // 레이저
+            else ans += 1; // 막대 -1
         }
     }
     
-    cout << answer;
-    return 0;
+    cout << ans;
 }
