@@ -20,6 +20,10 @@ struct Point
     {
         return { x - p.x, y - p.y };
     }
+    bool operator == (const Point& p) const
+    {
+        return x == p.x && y == p.y;
+    }
 };
 
 long long crossProduct(Point a, Point b) 
