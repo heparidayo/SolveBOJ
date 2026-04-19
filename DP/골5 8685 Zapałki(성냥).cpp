@@ -39,7 +39,4 @@ int main()
         h.push_back(x);
     }
 
-
-
-
 }

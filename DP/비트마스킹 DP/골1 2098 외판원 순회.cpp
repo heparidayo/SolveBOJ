@@ -1,8 +1,10 @@
+// 외판원 - DP
+
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
-#define INF 1e9
+const int INF = 0x3f3f3f3f;
 
 int n;
 int w[16][16];
@@ -17,13 +19,13 @@ int dfs(int cur, int visit)
         return INF;
     }
 
-    // 2. 이미 계산된 경로인 경우 (메모이제이션)
+    // 이미 계산된 경로인 경우 (메모이제이션)
     if (dp[cur][visit] != 0) 
         return dp[cur][visit];
 
     dp[cur][visit] = INF;
 
-    // 3. 아직 방문하지 않은 다음 도시들을 탐색합니다
+    // 아직 방문하지 않은 다음 도시들을 탐색
     for (int i = 0; i < n; i++)
     {
         // 가는 길이 없거나, 이미 방문한 도시인 경우 패스
